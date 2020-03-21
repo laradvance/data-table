@@ -12,7 +12,7 @@ class DataTableServiceProvider extends ServiceProvider
      */
     public function boot(DataTableExtension $extension)
     {
-        if (!DataTableExtension::boot()) {
+        if (! DataTableExtension::boot()) {
             return;
         }
 
