@@ -40,7 +40,7 @@ class DataTable extends Widget implements Renderable
      */
     public function __construct($headers = [], $rows = [], $style = [], $options = [], $id = 'datatable')
     {
-        $global_options = (array)config('admin.extensions.data-table.options');
+        $global_options = (array) config('admin.extensions.data-table.options');
         $options = array_merge($global_options, $options);
         $options = $this->loadLanguage($options);
         $this->setHeaders($headers);
@@ -48,7 +48,7 @@ class DataTable extends Widget implements Renderable
         $this->setStyle($style);
         $this->setOptions($options);
         $this->id($id);
-        $this->class('table dataTable ' . implode(' ', $this->style));
+        $this->class('table dataTable '.implode(' ', $this->style));
     }
 
     /**
@@ -118,19 +118,19 @@ class DataTable extends Widget implements Renderable
     /**
      * Render the table.
      *
-     * @return mixed|string
-     *
      * @throws \Throwable
+     *
+     * @return mixed|string
      */
     public function render()
     {
         $vars = [
-            'headers' => $this->headers,
-            'rows' => $this->rows,
-            'style' => $this->style,
-            'id' => $this->id,
+            'headers'    => $this->headers,
+            'rows'       => $this->rows,
+            'style'      => $this->style,
+            'id'         => $this->id,
             'attributes' => $this->formatAttributes(),
-            'options' => json_encode($this->options),
+            'options'    => json_encode($this->options),
         ];
 
         return view($this->view, $vars)->render();
@@ -138,13 +138,14 @@ class DataTable extends Widget implements Renderable
 
     /**
      * @param $options
+     *
      * @return mixed
      */
     protected function loadLanguage($options)
     {
         if (isset($options['language'])) {
             $language = ucfirst($options['language']);
-            $file = __DIR__ . "/../resources/assets/plugins/i18n/{$language}.lang";
+            $file = __DIR__."/../resources/assets/plugins/i18n/{$language}.lang";
             if (file_exists($file)) {
                 $content = file_get_contents($file);
                 $content = substr($content, strpos($content, '{'));
@@ -154,6 +155,7 @@ class DataTable extends Widget implements Renderable
                 unset($options['language']);
             }
         }
+
         return $options;
     }
 }
